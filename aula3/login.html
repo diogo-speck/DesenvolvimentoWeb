@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Login</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/global.css'>
+    <script src='main.js'></script>
+</head>
+<style>
+    form,
+    label {
+        width: 100%;
+        font-size: 150%;
+        align-items: center;
+    }
+
+    .logando {
+        width: 100%;
+        font-size: 150%;
+        align-items: center;
+    }
+</style>
+
+<body>
+    <div class="logando">
+        <h2>Área de login do usuário</h2>
+        <form>
+            <label> Login: </label>
+            <input type="text" id="login" required>
+            <label> Senha: </label>
+            <input type="password" id="senha" required>
+            <input type="submit" id="enviar" value="Entrar" onclick="getLogin()">
+        </form>
+    </div>
+    <script>
+        function getLogin() {
+            let login = document.getElementById("login").value;
+            let senha = document.getElementById("senha").value;
+            if (login === "" && senha === "") {
+                alert("Login e senha inválidos!");
+            } else {
+                let url = "./index.html";
+                window.open(url);
+            }
+        }
+    </script>
+</body>
+
+</html>
