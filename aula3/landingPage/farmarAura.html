@@ -1,106 +1,356 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
+
 
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campeonato de Farmar Aura</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='aura.css'>
+    <link rel="stylesheet" href="aura.css">
 </head>
 
+
 <body>
-    <header>
-        <h1>Campeonato de Farmar Aura</h1>
-        <h2>Competição presencial em que jovens disputam carisma, estilo e presença de palco, sendo avaliados pela
-            reação do público.</h2>
-        <button><a href="#inscricao">Inscreva-se</a></button>
-        <img src="https://th.bing.com/th/id/OIP.NKVKmlev1Y-5TDuv6jKEWAHaEK?w=322&h=181&c=7&r=0&o=7&pid=1.7&rm=3"
-            alt="imagem de uma aura roxa">
-        <img src="https://th.bing.com/th/id/R.ebb26c8c8612d8e7d185c207953a1913?rik=%2f3ZAMfT48sx2kA&pid=ImgRaw&r=0"
-            alt="uma pessoa com aura">
+
+
+    <!-- HERO -->
+
+
+    <header class="hero">
+        <nav class="menu">
+            <div class="logo">
+                AURA<span>+</span>
+            </div>
+            <ul>
+       
+                <li>
+                    <a href="farmarAura.html">Início</a>
+                </li>
+       
+                <li>
+                    <a href="#sobre">O Campeonato</a>
+                </li>
+       
+                <li>
+                    <a href="#dicas">Como Farmar</a>
+                </li>
+       
+                <li>
+                    <a href="#lendas">Lendas</a>
+                </li>
+       
+                <li>
+                    <a href="#planos">Inscrição</a>
+                </li>
+       
+                <li>
+                    <a href="#premiacao">Premiação</a>
+                </li>
+       
+                <li>
+                    <a href="#inscricao" class="menu-botao">
+                        PARTICIPAR
+                    </a>
+                </li>
+       
+            </ul>
+        </nav>
+        <div class="hero-texto">
+            <p class="subtitulo">O MAIOR DESAFIO DE AURA</p>
+            <h1>CAMPEONATO<br>DE FARMAR AURA</h1>
+            <p class="descricao">
+                Uma competição presencial onde carisma,
+                estilo e presença de palco são colocados à prova.
+            </p>
+            <a href="#inscricao" class="botao">
+                INSCREVA-SE AGORA
+            </a>
+        </div>
+        <div class="hero-imagem">
+
+            <img
+                src="https://th.bing.com/th/id/OIP.NKVKmlev1Y-5TDuv6jKEWAHaEK?w=322&h=181&c=7&r=0&o=7&pid=1.7&rm=3"
+                alt="Aura roxa">
+        </div>
     </header>
 
-    <section>
-        <h1>O que levar para Farmar Aura?</h1>
-        <h3>Para farmar Aura, leve itens que aumentem sua resistência, velocidade e eficiência durante a partida.
-            Equipamentos de proteção, alimentos ou poções para recuperação e itens que aumentem seus ganhos são ótimas
-            escolhas. Prepare seu inventário com cuidado e venha pronto para farmar o máximo de Aura possível!</h3>
-        <h2>Maiores farmadores de auras dos últimos tempos</h2>
-        <img src="https://th.bing.com/th/id/OIP.gLub0s4qK85jHe1rspT1zQHaEK?w=314&h=180&c=7&r=0&o=7&pid=1.7&rm=3"
-            alt="garoto do 67">
-        <img src="https://i.kym-cdn.com/entries/icons/original/000/026/152/gigachadd.jpg" alt="o cara do meme do chad">
-        <img src="https://wallpapers.com/images/hd/ultra-instinct-saiyan-son-goku-iphone-0sjth7ml49d0ogw8.jpg"
-            alt="goku ultra instinct saiyan">
-    </section>
 
-    <section>
-        <h1>Dicas para Farmar Aura</h1>
-        <h3>Quer farmar muita Aura? Foque em eficiência! Escolha os melhores locais para farmar, utilize equipamentos
-            que aumentem seus ganhos e aproveite bônus ou eventos especiais. Evite perder tempo e mantenha seu ritmo
-            constante. Quanto mais tempo você conseguir farmar de forma eficiente, maior será sua quantidade de Aura!
-        </h3>
-        <h4>Fique atento às oportunidades e mantenha uma rotina eficiente para maximizar seus ganhos. Com boas ações e
-            estratégia, sua Aura vai subir muito mais rápido!</h4>
-        <button><a href="#inscricao">Inscreva-se</a></button>
-    </section>
+    <!-- SOBRE O CAMPEONATO -->
 
-    <section>
-        <h1>Porque você deveria participar?</h1>
-        <h2>Participe para testar suas estratégias, competir com outros jogadores, alcançar o topo do ranking e, claro,
-            provar até onde sua Aura consegue chegar. Prepare-se, dê o seu melhor e venha disputar a liderança!</h2>
-    </section>
 
-    <section>
-        <h1>Taxas de Inscrição</h1>
-        <div>
-            <h2>Plano Iniciante</h2>
-            <h3>Gratuito</h3>
-            <h4>Uma opção acessível para todos os públicos do campeonato.</h4>
+    <section class="sobre" id="#sobre">
+        <div class="sobre-texto">
+            <p class="subtitulo">SOBRE O CAMPEONATO</p>
+            <h2>Você tem Aura suficiente?</h2>
+            <p>
+                O Campeonato de Farmar Aura é uma competição
+                presencial em que jovens disputam carisma,
+                estilo e presença de palco.
+            </p>
+            <p>
+                Durante o evento, os participantes serão
+                avaliados pela reação do público e deverão
+                mostrar todo o seu potencial para alcançar
+                o topo do ranking.
+            </p>
         </div>
-        <div>
-            <h2>Plano Competidor</h2>
-            <h3>R$ 25</h3>
-            <h4>Para quem quer uma experiência mais completa e busca concorrer aos prêmios.</h4>
-        </div>
-        <div>
-            <h2>Plano Lendário</h2>
-            <h3>R$ 50</h3>
-            <h4>A escolha para quem quer entrar na disputa já classificado para o campeonato final, diretamente pelo
-                topo para mostrar todo o seu potencial.</h4>
-        </div>
+        <div class="sobre-imagem">
 
-        <div>
-            <h2>Premiação</h2>
-            <thead>
-                <tr>
-                    <th>1º lugar</th>
-                    <th>2º lugar</th>
-                    <th>3º lugar</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr>
-                    <td>R$ 250 + Troféu de Campeão</td>
-                    <td>R$ 150 + Medalha de Prata</td>
-                    <td>R$ 100 + Medalha de Bronze</td>
-                </tr>
-            </tbody>
-            <caption>Bônus especial: o jogador que alcançar a maior quantidade de Aura durante o campeonato recebe um
-                prêmio extra de R$ 50!</caption>
+            <img
+                src="https://th.bing.com/th/id/R.ebb26c8c8612d8e7d185c207953a1913?rik=%2f3ZAMfT48sx2kA&pid=ImgRaw&r=0"
+                alt="Pessoa com aura">
         </div>
     </section>
 
-    <footer id="inscricao">
-        <form>
-            <h1>Inscrição</h1>
-            <label>
-                Nome
-            </label>
-        </form>
-        <input type="text" id="nome" required>
+
+    <!-- COMO FARMAR AURA -->
+
+
+    <section class="dicas" id="#dicas">
+        <p class="subtitulo">PREPARE-SE</p>
+        <h2>Como Farmar Aura?</h2>
+        <p class="texto-central">
+            Para alcançar o topo, você precisa dominar
+            os principais atributos de um verdadeiro
+            farmador de Aura.
+        </p>
+        <div class="cards">
+            <div class="card">
+                <div class="icone">⚡</div>
+                <h3>Presença</h3>
+                <p>
+                    Entre no ambiente e faça todos perceberem
+                    que você chegou.
+                </p>
+            </div>
+            <div class="card">
+                <div class="icone">😎</div>
+                <h3>Estilo</h3>
+                <p>
+                    Sua aparência e seu jeito também fazem
+                    parte da sua Aura.
+                </p>
+            </div>
+            <div class="card">
+                <div class="icone">👑</div>
+                <h3>Carisma</h3>
+                <p>
+                    Conquiste o público e mostre por que
+                    você merece estar no topo.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- LENDAS -->
+
+
+    <section class="lendas" id="#lendas">
+        <p class="subtitulo">INSPIRAÇÃO</p>
+        <h2>Maiores Farmadores de Aura</h2>
+        <p class="texto-central">
+            Estude as lendas. Aprenda com os melhores.
+            Depois, supere todos eles.
+        </p>
+        <div class="galeria">
+            <div class="personagem">
+                <img
+                    src="https://th.bing.com/th/id/OIP.gLub0s4qK85jHe1rspT1zQHaEK?w=314&h=180&c=7&r=0&o=7&pid=1.7&rm=3"
+                    alt="Garoto do 67">
+                <h3>O Garoto do 67</h3>
+                <p>Especialista em presença.</p>
+            </div>
+            <div class="personagem">
+                <img
+                    src="https://i.kym-cdn.com/entries/icons/original/000/026/152/gigachadd.jpg"
+                    alt="Gigachad">
+                <h3>Gigachad</h3>
+                <p>Uma Aura praticamente lendária.</p>
+            </div>
+            <div class="personagem">
+                <img
+                    src="https://wallpapers.com/images/hd/ultra-instinct-saiyan-son-goku-iphone-0sjth7ml49d0ogw8.jpg"
+                    alt="Goku Ultra Instinct">
+
+                <h3>Goku Ultra Instinct</h3>
+                <p>Domínio absoluto da Aura.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- POR QUE PARTICIPAR -->
+
+
+    <section class="participar" id="#participar">
+        <div>
+            <p class="subtitulo">O DESAFIO COMEÇA AGORA</p>
+            <h2>Por que você deveria participar?</h2>
+            <p>
+                Teste suas habilidades, enfrente outros
+                competidores e descubra até onde sua Aura
+                consegue chegar.
+            </p>
+            <p>
+                Alcance o topo do ranking, conquiste o público
+                e prove que você é um verdadeiro farmador.
+            </p>
+            <a href="#inscricao" class="botao">
+                QUERO PARTICIPAR
+            </a>
+        </div>
+    </section>
+
+
+    <!-- PLANOS -->
+
+
+    <section class="planos" id="#planos">
+        <p class="subtitulo">ESCOLHA SUA EXPERIÊNCIA</p>
+        <h2>Taxas de Inscrição</h2>
+        <div class="planos-container">
+            <div class="plano">
+                <h3>INICIANTE</h3>
+                <div class="preco">GRÁTIS</div>
+                <p>
+                    Uma opção acessível para todos
+                    os públicos do campeonato.
+                </p>
+                <a href="#inscricao" class="botao-secundario">
+                    ESCOLHER
+                </a>
+            </div>
+            <div class="plano destaque">
+                <span>MAIS ESCOLHIDO</span>
+                <h3>COMPETIDOR</h3>
+                <div class="preco">R$ 25</div>
+                <p>
+                    Para quem quer uma experiência
+                    mais completa e busca concorrer
+                    aos prêmios.
+                </p>
+                <a href="#inscricao" class="botao">
+                    ESCOLHER
+                </a>
+            </div>
+            <div class="plano">
+                <h3>LENDÁRIO</h3>
+                <div class="preco">R$ 50</div>
+                <p>
+                    Entre diretamente na disputa
+                    final e mostre todo o seu potencial.
+                </p>
+                <a href="#inscricao" class="botao-secundario">
+                    ESCOLHER
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- PREMIAÇÃO -->
+
+
+    <section class="premiacao" id="#premiacao">
+        <p class="subtitulo">MOSTRE SEU POTENCIAL</p>
+        <h2>Premiação</h2>
+        <div class="premios">
+            <div class="premio primeiro">
+                <div class="medalha">🥇</div>
+                <h3>1º LUGAR</h3>
+                <strong>R$ 250</strong>
+                <p>
+                    + Troféu de Campeão
+                </p>
+            </div>
+            <div class="premio segundo">
+                <div class="medalha">🥈</div>
+                <h3>2º LUGAR</h3>
+                <strong>R$ 150</strong>
+                <p>
+                    + Medalha de Prata
+                </p>
+            </div>
+            <div class="premio terceiro">
+                <div class="medalha">🥉</div>
+                <h3>3º LUGAR</h3>
+                <strong>R$ 100</strong>
+                <p>
+                    + Medalha de Bronze
+                </p>
+            </div>
+        </div>
+        <div class="bonus">
+            <h3>🔥 BÔNUS ESPECIAL</h3>
+            <p>
+                O jogador que alcançar a maior quantidade
+                de Aura durante o campeonato recebe
+                um prêmio extra de <strong>R$ 50!</strong>
+            </p>
+        </div>
+    </section>
+
+
+    <!-- INSCRIÇÃO -->
+
+
+    <footer id="inscricao" id="#inscricao">
+        <div class="formulario">
+            <p class="subtitulo">ÚLTIMO PASSO</p>
+            <h2>Está pronto para Farmar Aura?</h2>
+            <p>
+                Preencha seus dados e garanta sua participação.
+            </p>
+            <form>
+                <label for="nome">
+                    Nome
+                </label>
+                <input
+                    type="text"
+                    id="nome"
+                    name="nome"
+                    placeholder="Digite seu nome"
+                    required
+                >
+                <label for="email">
+                    E-mail
+                </label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Digite seu e-mail"
+                    required
+                >
+                <label for="categoria">
+                    Categoria
+                </label>
+                <select
+                    id="categoria"
+                    name="categoria"
+                >
+                    <option>
+                        Plano Iniciante
+                    </option>
+                    <option>
+                        Plano Competidor
+                    </option>
+                    <option>
+                        Plano Lendário
+                    </option>
+                </select>
+                <button
+                    type="submit"
+                    class="botao"
+                >
+                    FARMAR MINHA AURA
+                </button>
+            </form>
+        </div>
+        <p class="copyright">
+            © 2026 Campeonato de Farmar Aura
+        </p>
     </footer>
 </body>
-
 </html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos</title>
+    <link rel="stylesheet" href="./assets/estilos/global.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1> Produtos para colocar no carrinho </h1>
+        <table>
+            <thead>
+                <tr>
+                    <th> Produto </th>
+                    <th> Quantidade </th>
+                    <th> Preço </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> Havaianas </td>
+                    <td> 
+                        <input type="number" 
+                               id="hav_quantidade"
+                               value="0"
+                               min="0"
+                               onchange="atualizarPreco('hav')"
+                        >
+                    </td>
+                    <td id="hav_preco"> R$0.00 </td>
+                </tr>
+                <tr>
+                    <td> Alpargatas </td>
+                    <td> 
+                        <input type="number" 
+                               id="alp_quantidade"
+                               value="0"
+                               min="0"
+                               onchange="atualizarPreco('alp')"
+                        >
+                    </td>
+                    <td id="alp_preco"> R$0.00 </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="./resumo.html" class="botao" onclick="salvarProdutos()">
+            Continuar
+        </a>
+    </div>
+    <script type="text/javascript" src="./assets/scripts/produtos.js"></script>
+</body>
+
+</html>

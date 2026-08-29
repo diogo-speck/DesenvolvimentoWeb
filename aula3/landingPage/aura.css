@@ -1,20 +1,571 @@
-body {
-    background-color: rgb(179, 83, 179);
-    font-family: 'Orbitron';
-    color: black;
-    justify-content: center;
-    padding: 25px;
-    margin-top: 10px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-header {
-    background-color: #7b7cb3;
-    padding: 15px;
-    margin: 0;
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    background: #080511;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+
+/* MENU */
+
+
+.menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 7%;
+    background: #080511;
+    border-bottom: 1px solid #291c39;
+}
+
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+.logo span {
+    color: #c77dff;
+}
+
+
+.menu ul {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    list-style: none;
+}
+
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+
+.menu a:hover {
+    color: #c77dff;
+}
+
+
+.menu-botao {
+    background: #9d4edd;
+    padding: 10px 15px;
     border-radius: 5px;
 }
 
-section{
+
+
+
+/* GERAL */
+
+
+section {
+    padding: 80px 10%;
+}
+
+
+h2 {
+    font-size: 40px;
+    margin-bottom: 25px;
+}
+
+
+.subtitulo {
+    color: #c77dff;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+
+.texto-central {
+    max-width: 650px;
+    margin: 0 auto 40px;
+    color: #aaa;
+    line-height: 1.6;
+}
+
+
+
+
+/* BOTÕES */
+
+
+.botao {
+    display: inline-block;
+    padding: 15px 25px;
+    background: #9d4edd;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+
+.botao:hover {
+    background: #c77dff;
+}
+
+
+.botao-secundario {
+    display: inline-block;
+    padding: 13px 25px;
+    border: 1px solid #9d4edd;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+
+.botao-secundario:hover {
+    background: #9d4edd;
+}
+
+
+
+
+/* HERO */
+
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    padding: 120px 10% 70px;
+    background: #080511;
+}
+
+
+.hero-texto {
+    max-width: 600px;
+}
+
+
+.hero h1 {
+    font-size: 65px;
+    line-height: 1;
+    margin-bottom: 25px;
+    color: white;
+}
+
+
+.descricao {
+    color: #ccc;
+    font-size: 19px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+
+.hero-imagem {
+    width: 45%;
+}
+
+
+.hero-imagem img {
     width: 100%;
+    border-radius: 10px;
+}
+
+
+
+
+/* SOBRE */
+
+
+.sobre {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    background: #10091b;
+}
+
+
+.sobre-texto {
+    flex: 1;
+}
+
+
+.sobre-texto p:not(.subtitulo) {
+    color: #bbb;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+
+.sobre-imagem {
+    flex: 1;
+}
+
+
+.sobre-imagem img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+
+
+
+/* DICAS */
+
+
+.dicas {
+    text-align: center;
+}
+
+
+.cards {
+    display: flex;
     justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+
+.card {
+    width: 300px;
+    padding: 35px 25px;
+    background: #130d1d;
+    border: 1px solid #291c39;
+    border-radius: 10px;
+}
+
+
+.card:hover {
+    border-color: #9d4edd;
+}
+
+
+.icone {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+
+.card h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+
+.card p {
+    color: #aaa;
+    line-height: 1.6;
+}
+
+
+
+
+/* LENDAS */
+
+
+.lendas {
+    text-align: center;
+    background: #10091b;
+}
+
+
+.galeria {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+
+    flex-wrap: wrap;
+}
+
+
+.personagem {
+    width: 300px;
+    background: #170e22;
+    border: 1px solid #291c39;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+
+.personagem img {
+    width: 100%;
+    height: 210px;
+
+
+    object-fit: cover;
+}
+
+
+.personagem h3 {
+    margin: 20px 15px 10px;
+}
+
+
+.personagem p {
+    color: #aaa;
+    margin: 0 15px 25px;
+}
+
+
+
+
+/* PARTICIPAR */
+
+
+.participar {
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+
+    background:
+        linear-gradient(#080511aa, #080511aa),
+        url("https://wallpapers.com/images/hd/ultra-instinct-saiyan-son-goku-iphone-0sjth7ml49d0ogw8.jpg")
+        center / cover;
+}
+
+
+.participar > div {
+    max-width: 600px;
+}
+
+
+.participar p:not(.subtitulo) {
+    color: #ccc;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+
+
+
+/* PLANOS */
+
+
+.planos {
+    text-align: center;
+}
+
+
+.planos-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+
+.plano {
+    width: 300px;
+    padding: 35px 25px;
+    background: #130d1d;
+    border: 1px solid #291c39;
+    border-radius: 10px;
+}
+
+
+.plano h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+
+.preco {
+    color: #c77dff;
+    font-size: 35px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+
+.plano p {
+    color: #aaa;
+    line-height: 1.6;
+    min-height: 80px;
+    margin-bottom: 25px;
+}
+
+
+.plano span {
+    display: block;
+    background: #9d4edd;
+    padding: 8px;
+    margin: -35px -25px 25px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+.destaque {
+    border: 2px solid #9d4edd;
+}
+
+
+
+
+/* PREMIAÇÃO */
+
+
+.premiacao {
+    text-align: center;
+    background: #10091b;
+}
+
+
+.premios {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+
+.premio {
+    width: 280px;
+    padding: 30px;
+    background: #170e22;
+    border: 1px solid #291c39;
+    border-radius: 10px;
+}
+
+
+.medalha {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+
+.premio h3 {
+    margin-bottom: 10px;
+}
+
+
+.premio strong {
+    display: block;
+    color: #c77dff;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+
+.premio p {
+    color: #aaa;
+}
+
+
+.bonus {
+    max-width: 650px;
+    margin: auto;
+    padding: 25px;
+    border: 1px solid #9d4edd;
+    border-radius: 10px;
+    background: #170e22;
+}
+
+
+.bonus h3 {
+    color: #c77dff;
+    margin-bottom: 10px;
+}
+
+
+.bonus p {
+    color: #bbb;
+    line-height: 1.6;
+}
+
+
+
+
+/* FORMULÁRIO */
+
+
+footer {
+    padding: 80px 10% 30px;
+
+
+    background: #050308;
+}
+
+
+.formulario {
+    max-width: 550px;
+    margin: auto;
+}
+
+
+.formulario h2 {
+    font-size: 38px;
+}
+
+
+.formulario > p:not(.subtitulo) {
+    color: #aaa;
+    margin-bottom: 30px;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+
+label {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+
+input,
+select {
+    padding: 13px;
+    margin-bottom: 20px;
+    background: #130d1d;
+    border: 1px solid #332343;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+}
+
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #9d4edd;
+}
+
+
+form .botao {
+    border: none;
+    cursor: pointer;
+}
+
+
+.copyright {
+    text-align: center;
+    color: #555;
+    margin-top: 60px;
 }
