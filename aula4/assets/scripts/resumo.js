@@ -16,9 +16,24 @@ const carregarProdutos = function () {
         sessionStorage.getItem('produtos')
     );
 
-    document.getElementById('hav_quantidade').innerText = produtos.havaianas;
-    document.getElementById('alp_quantidade').innerText = produtos.alpargatas;
-    document.getElementById('total').innerText = produtos.total;
+    let hav_preco = parseFloat(
+        produtos.havaianas.preco.replace('R$ ', '')
+    );
+
+    let alp_preco = parseFloat(
+        produtos.alpargatas.preco.replace('R$ ', '')
+    );
+
+    let total = hav_preco + alp_preco;
+
+    document.getElementById('hav_quantidade').innerText =
+        produtos.havaianas.quantidade;
+
+    document.getElementById('alp_quantidade').innerText =
+        produtos.alpargatas.quantidade;
+
+    document.getElementById('total').innerText =
+        `R$ ${total}`;
 }
 
 carregarProdutos();

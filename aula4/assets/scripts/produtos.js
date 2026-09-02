@@ -31,19 +31,3 @@ const salvarProdutos = function () {
         JSON.stringify(produtos)
     );
 }
-
-const carregarProdutos = function () {
-   
-
-    let hav_quantidade = sessionStorage.getItem('hav_quantidade');
-    let hav_preco = sessionStorage.getItem('hav_preco');
-    let alp_quantidade = sessionStorage.getItem('alp_quantidade');
-    let alp_preco = sessionStorage.getItem('alp_preco');
-
-    let total = hav_preco+alp_preco;
-    let carrinho = `Havaianas ${hav_quantidade}
-    \nAlpargatas ${alp_quantidade}
-    \nTotal ${total}`;
-    
-    console.log(carrinho);
-}
