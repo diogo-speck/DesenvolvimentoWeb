@@ -42,11 +42,12 @@
         <h2>Insira os envolvidos da ocorrência</h2>
         <div class="option">
             <form action="veiculos.html" method="post">
-                <label for="place">Nome dos Indivíduos:</label>
-                <input type="text" id="text" name="place" required><br><br>
+                <label for="name">Nome dos Indivíduos:</label>
+                <input type="text" id="text" name="name" required><br><br>
                 <label for="more">Adicionar pessoas</label>
                 <input type="checkbox" id="more" name="more"><br><br>
-                <a href="veiculos.html"><input type="submit" value="Próximo"></a>
+                <a href="veiculos.html"><input type="submit" value="Próximo"
+                onclick="saveData(name, 'envolvidos')"></a>
             </form>
         </div>
     </section>

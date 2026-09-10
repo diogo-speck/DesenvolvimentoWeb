@@ -46,7 +46,8 @@
                 <input type="date" id="data" name="data" required><br><br>
                 <label for="hora">Hora do Fato:</label>
                 <input type="time" id="hora" name="hora" required><br><br>
-                <a href="local.html"><input type="submit" value="Próximo"></a>
+                <input type="submit" value="Próximo"
+                onclick="saveData(data.value + ' ' + hora.value, 'dataehora'); window.location.href='local.html'">
             </form>
         </div>
     </section>

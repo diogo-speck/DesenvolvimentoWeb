@@ -9,7 +9,7 @@
     <script src='main.js'></script>
 </head>
 
-<body>
+<body onload="showData()">
     <header>
         <nav title="Etapas do Registro">
             <ol>
@@ -40,10 +40,12 @@
     <section class="panel">
         <h1>Confirmação</h1>
         <h2>Marque que você confirma as informações declarando para os devidos fins que todas as informações e dados fornecidos neste formulário/documento são verdadeiros, corretos e correspondem à realidade.</h2>
+        <h3 id="final"></h3>
         <div class="option">
             <form action="denuncia.html" method="post">
                 <label for="confirmacao">Aceito os devidos termos</label>
-                <input type="checkbox" id="confirmacao" name="confirmacao"><br><br>
+                <input type="checkbox" id="confirmacao" name="confirmacao" required
+                onclick="saveData(true, 'aceita')"><br><br>
                 <a href="denuncia.html"><input type="submit" value="Enviar"></a>
             </form>
         </div>
