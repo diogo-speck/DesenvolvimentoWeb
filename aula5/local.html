@@ -14,13 +14,19 @@
         <nav title="Etapas do Registro">
             <ol>
                 <li>
-                    <a href="denuncia.html"><spam>1</spam><br><br><br>Fato Ocorrido</a>
+                    <a href="denuncia.html">
+                        <spam>1</spam><br><br><br>Fato Ocorrido
+                    </a>
                 </li>
                 <li>
-                    <a href="dataehora.html"><spam>2</spam><br><br><br>Data e Hora do Fato</a>
+                    <a href="dataehora.html">
+                        <spam>2</spam><br><br><br>Data e Hora do Fato
+                    </a>
                 </li>
                 <li>
-                    <a href="local.html"><spam>3</spam><br><br><br>Local do Fato</a>
+                    <a href="local.html">
+                        <spam>3</spam><br><br><br>Local do Fato
+                    </a>
                 </li>
                 <li>
                     <spam>4</spam><br><br><br>Envolvidos
@@ -40,8 +46,7 @@
     <section class="panel">
         <h1>Local</h1>
         <h2>Tipo de local</h2>
-        <div class="option"
-        onclick="saveData(place, 'local')">
+        <div class="option" onsubmit="saveData(place, 'local')">
             <form action="envolvidos.html" method="get">
                 <label for="place">Local do Fato:</label>
                 <input type="text" id="text" name="place" required><br><br>

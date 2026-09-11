@@ -14,10 +14,14 @@
         <nav title="Etapas do Registro">
             <ol>
                 <li>
-                    <a href="denuncia.html"><spam>1</spam><br><br><br>Fato Ocorrido</a>
+                    <a href="denuncia.html">
+                        <spam>1</spam><br><br><br>Fato Ocorrido
+                    </a>
                 </li>
                 <li>
-                    <a href="dataehora.html"><spam>2</spam><br><br><br>Data e Hora do Fato</a>
+                    <a href="dataehora.html">
+                        <spam>2</spam><br><br><br>Data e Hora do Fato
+                    </a>
                 </li>
                 <li>
                     <spam>3</spam><br><br><br>Local do Fato
@@ -46,8 +50,7 @@
                 <input type="date" id="data" name="data" required><br><br>
                 <label for="hora">Hora do Fato:</label>
                 <input type="time" id="hora" name="hora" required><br><br>
-                <input type="submit" value="Próximo"
-                onclick="saveData(data.value + ' ' + hora.value, 'dataehora'); window.location.href='local.html'">
+                <input type="submit" value="Próximo" onsubmit="saveData(data.value + ' ' + hora.value, 'dataehora')">
             </form>
         </div>
     </section>
