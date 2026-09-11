@@ -40,12 +40,12 @@
     <section class="panel">
         <h1>Local</h1>
         <h2>Tipo de local</h2>
-        <div class="option">
-            <form action="envolvidos.html" method="post">
+        <div class="option"
+        onclick="saveData(place, 'local')">
+            <form action="envolvidos.html" method="get">
                 <label for="place">Local do Fato:</label>
                 <input type="text" id="text" name="place" required><br><br>
-                <a href="envolvidos.html"><input type="submit" value="Próximo"
-                onclick="saveData(local, 'local')"></a>
+                <input type="submit" value="Próximo">
             </form>
         </div>
     </section>

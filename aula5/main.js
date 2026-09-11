@@ -1,20 +1,28 @@
 let dados = JSON.parse(localStorage.getItem("dados")) || { // substitui o loadData
-tipo: null,
-dataehora: null,
-local: null,
-envolvidos: null,
-objetos: null,
-relato: null,
-aceita: false
+    tipo: null,
+    dataehora: null,
+    local: null,
+    envolvidos: null,
+    objetos: null,
+    relato: null,
+    aceita: false
 };
 
 function saveData(elemento, atributo){
-dados[atributo] = elemento;
+    dados[atributo] = elemento;
 
-localStorage.setItem("dados", JSON.stringify(dados));
+    localStorage.setItem("dados", JSON.stringify(dados));
 
-console.log(dados[atributo] + ": " + elemento);
+    console.log(dados[atributo] + ": " + elemento);
 }
+
+const adasdmasd = document.querySelectorAll("sdnfdfmg");
+
+adasdmasd.addEventListener("click", () => {
+
+})
+
+// Propagação de evento js
 
 /*
 function loadData() {
