@@ -1,0 +1,2070 @@
+REVISÃO – DESENVOLVIMENTO WEB
+Material baseado nos arquivos do projeto DesenvolvimentoWeb
+==============================================================
+
+COMO USAR ESTA REVISÃO PARA A PROVA
+----------------------
+Este resumo reúne os principais conceitos que aparecem nas aulas/projetos:
+HTML, CSS, formulários, JavaScript, DOM, eventos, armazenamento no navegador,
+JSON, sessionStorage/localStorage, Fetch API, APIs REST/JSON, Bootstrap,
+criação dinâmica de elementos e alguns erros comuns encontrados nos próprios
+arquivos do projeto.
+
+==============================================================
+1. HTML – ESTRUTURA BÁSICA
+==============================================================
+
+Estrutura mínima (ctrl + space):
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Título</title>
+</head>
+<body>
+    Conteúdo
+</body>
+</html>
+
+PRINCIPAIS ELEMENTOS
+--------------------
+<html>       raiz do documento.
+<head>       metadados, título, CSS, scripts etc.
+<body>       conteúdo visível.
+<header>     cabeçalho.
+<nav>        navegação.
+<main>       conteúdo principal.
+<section>    seção temática.
+<footer>     rodapé.
+<h1>...<h6> títulos.
+<p>          parágrafo.
+<a>          link.
+<img>        imagem.
+<ul>         lista não ordenada.
+<ol>         lista ordenada.
+<li>         item de lista.
+<div>        contêiner genérico.
+<span>       contêiner inline/genérico.
+<table>      tabela.
+<form>       formulário.
+
+ATRIBUTOS IMPORTANTES
+---------------------
+id="..."        identifica UM elemento. Deve ser único na página.
+class="..."     agrupa elementos para aplicar CSS/JS.
+href="..."      destino de links.
+src="..."       origem de imagens/scripts.
+alt="..."       texto alternativo da imagem.
+title="..."     informação auxiliar/tooltip.
+name="..."      nome do campo enviado por formulário.
+value="..."     valor de um input/botão.
+required        torna o campo obrigatório.
+placeholder     texto de orientação dentro do input.
+min/max         limita valores numéricos.
+type             define o tipo do input.
+
+ID x CLASS
+----------
+id:
+- identifica um elemento específico;
+- JavaScript pode usar getElementById("id");
+- CSS usa #id.
+
+class:
+- pode ser usada por vários elementos;
+- CSS usa .classe;
+- JavaScript pode selecionar vários elementos com querySelectorAll().
+
+EXEMPLO:
+<div id="posts" class="card-container"></div>
+
+document.getElementById("posts")
+document.querySelector(".card-container")
+
+LINKS
+-----
+<a href="pagina.html">Página</a>
+<a href="#secao">Ir para uma seção da mesma página</a>
+<a href="https://exemplo.com">Site externo</a>
+
+Para um link interno por âncora:
+<section id="sobre">...</section>
+<a href="#sobre">Sobre</a>
+
+ATENÇÃO:
+No projeto existem casos como id="#sobre". O padrão correto é:
+id="sobre"
+e:
+href="#sobre"
+
+Não se coloca # no valor do id.
+
+IMAGENS
+-------
+<img src="imagem.jpg" alt="Descrição da imagem">
+
+alt é importante para acessibilidade e também aparece quando a imagem não
+pode ser carregada.
+
+==============================================================
+2. FORMULÁRIOS HTML
+==============================================================
+
+Estrutura:
+
+<form>
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome">
+
+    <button type="submit">Enviar</button>
+</form>
+
+LABEL
+-----
+<label for="nome">Nome</label>
+<input id="nome">
+
+O for do label deve corresponder ao id do input.
+
+TIPOS DE INPUT IMPORTANTES
+--------------------------
+text       texto.
+password   senha.
+email      e-mail.
+number     número.
+checkbox   caixa de seleção.
+radio      escolha única entre opções.
+submit     envio do formulário.
+date       data.
+time       hora.
+
+Textarea:
+<textarea id="relato" name="relato"></textarea>
+
+Select:
+<select id="categoria" name="categoria">
+    <option>Plano Iniciante</option>
+    <option>Plano Competidor</option>
+</select>
+
+required:
+<input type="text" required>
+
+Impede o envio se o campo estiver vazio.
+
+FORM ACTION E METHOD
+--------------------
+<form action="pagina.html" method="get">
+
+action = página/URL para onde o formulário será enviado.
+method = método utilizado.
+
+GET:
+- dados normalmente aparecem na URL;
+- útil para consultas;
+- não deve ser usado para dados sensíveis.
+
+POST:
+- dados são enviados no corpo da requisição;
+- normalmente usado para envio de dados.
+
+==============================================================
+3. CSS – CASCATA E SELETORES
+==============================================================
+
+CSS = Cascading Style Sheets.
+Serve para definir aparência, layout e apresentação dos elementos HTML.
+
+FORMA EXTERNA:
+<link rel="stylesheet" href="css/global.css">
+
+FORMA INTERNA:
+<style>
+    body {
+        background-color: black;
+    }
+</style>
+
+FORMA INLINE:
+<p style="color:red">Texto</p>
+
+Preferência geral: CSS externo, pois facilita organização e manutenção.
+
+SELETORES
+---------
+Elemento:
+p { ... }
+
+Classe:
+.card { ... }
+
+ID:
+#posts { ... }
+
+Descendente:
+.card img { ... }
+
+Pseudo-classe:
+button:hover { ... }
+
+Pseudo-elemento:
+#newChat::after { ... }
+
+SELETORES IMPORTANTES
+---------------------
+*       todos os elementos
+body    elemento body
+.card   qualquer elemento com class="card"
+#user   elemento com id="user"
+.card img = imagens dentro de .card
+
+BOX MODEL
+---------
+Todo elemento pode ser entendido como:
+
+CONTENT
+PADDING
+BORDER
+MARGIN
+
+padding = espaço interno.
+border  = borda.
+margin  = espaço externo.
+
+box-sizing: border-box;
+faz width/height considerarem conteúdo + padding + border.
+
+DISPLAY
+-------
+block:
+- ocupa uma linha inteira por padrão.
+
+inline:
+- ocupa apenas o espaço necessário.
+
+flex:
+- cria um Flex Container.
+
+none:
+- remove o elemento do layout.
+
+FLEXBOX
+-------
+display: flex;
+
+flex-direction: row;
+    itens em linha.
+
+flex-direction: column;
+    itens em coluna.
+
+justify-content:
+- controla o eixo principal.
+- center, flex-start, flex-end, space-between etc.
+
+align-items:
+- controla o eixo transversal.
+
+flex-wrap: wrap;
+- permite quebrar os itens para outra linha.
+
+gap:
+- espaço entre os itens.
+
+Exemplo usado nas galerias:
+.gallery {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+POSITION
+--------
+position: relative;
+- mantém o elemento no fluxo e cria referência para filhos absolutos.
+
+position: absolute;
+- posiciona em relação ao ancestral posicionado.
+
+position: fixed;
+- fica fixo em relação à janela.
+
+No clone do chat:
+.card {
+    position: relative;
+}
+
+.card-footer {
+    position: absolute;
+    bottom: 0;
+}
+
+CORES
+-----
+background-color: #fff;
+color: #333;
+
+RGB:
+rgb(255, 0, 0)
+
+RGBA:
+rgba(0, 0, 0, 0.3)
+O último valor é a transparência/opacidade.
+
+VARIÁVEIS CSS
+------------
+:root {
+    --cinza-1: #343541;
+    --cinza-2: #202123;
+}
+
+Uso:
+background: var(--cinza-1);
+
+Vantagem: facilita reutilizar e alterar cores.
+
+TAMANHOS
+--------
+px  = pixels.
+%   = relativo ao elemento pai.
+vw  = porcentagem da largura da viewport.
+vh  = porcentagem da altura da viewport.
+em  = relativo ao tamanho da fonte do elemento.
+rem = relativo ao tamanho da fonte raiz.
+
+RESPONSIVIDADE
+--------------
+Meta tag:
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+flex-wrap: wrap;
+ajuda os elementos a quebrarem linha em telas menores.
+
+==============================================================
+4. TABELAS HTML
+==============================================================
+
+Estrutura:
+
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>Item</td>
+            <td>Descrição</td>
+        </tr>
+    </tbody>
+</table>
+
+<table> = tabela.
+<tr>    = linha.
+<th>    = célula de cabeçalho.
+<td>    = célula de dados.
+<thead> = cabeçalho.
+<tbody> = corpo.
+
+CSS usado:
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+border-collapse: collapse;
+faz as bordas das células se unirem.
+
+==============================================================
+5. JAVASCRIPT – FUNDAMENTOS
+==============================================================
+
+JavaScript adiciona comportamento e lógica à página.
+
+Variáveis:
+let nome = "Diogo";
+const idade = 20;
+var antigo = true;
+
+PREFERÊNCIA:
+- const quando a variável não será reatribuída;
+- let quando será reatribuída;
+- var é legado e normalmente deve ser evitado.
+
+TIPOS COMUNS
+------------
+string:
+let nome = "João";
+
+number:
+let idade = 20;
+
+boolean:
+let valido = true;
+
+array:
+let frutas = ["maçã", "banana"];
+
+object:
+let pessoa = {
+    nome: "João",
+    idade: 20
+};
+
+null:
+let valor = null;
+
+undefined:
+let valor;
+
+OPERADORES
+----------
+Aritméticos:
++  -  *  /  %
+
+Comparação:
+==   igualdade com conversão de tipo
+===  igualdade estrita
+!=
+!==
+>
+<
+>=
+<=
+
+Lógicos:
+&&   E
+||   OU
+!    NÃO
+
+IMPORTANTE:
+Prefira === e !== para evitar conversões automáticas inesperadas.
+
+CONDICIONAL
+-----------
+if (condicao) {
+    ...
+} else {
+    ...
+}
+
+Exemplo:
+if (login === "" && senha === "") {
+    alert("Inválidos");
+}
+
+==============================================================
+6. FUNÇÕES JAVASCRIPT
+==============================================================
+
+Função tradicional:
+function somar(a, b) {
+    return a + b;
+}
+
+Função armazenada em variável:
+const somar = function(a, b) {
+    return a + b;
+};
+
+Arrow function:
+const somar = (a, b) => {
+    return a + b;
+};
+
+OU:
+const somar = (a, b) => a + b;
+
+PARÂMETROS E ARGUMENTOS
+-----------------------
+function salvar(elemento, atributo) {
+    ...
+}
+
+salvar("acidente", "tipo");
+
+"acidente" e "tipo" são argumentos.
+elemento e atributo são parâmetros.
+
+RETURN
+------
+return devolve um valor para quem chamou a função.
+
+==============================================================
+7. DOM – DOCUMENT OBJECT MODEL
+==============================================================
+
+DOM representa o HTML como uma estrutura de objetos que o JavaScript pode
+consultar e modificar.
+
+SELECIONANDO ELEMENTOS
+----------------------
+
+Por ID:
+document.getElementById("resultado");
+
+Por seletor CSS:
+document.querySelector(".card");
+
+Vários elementos:
+document.querySelectorAll(".card");
+
+Por tag:
+document.getElementsByTagName("p");
+
+querySelector retorna o primeiro elemento que corresponde ao seletor.
+querySelectorAll retorna uma NodeList com os elementos correspondentes.
+
+ACESSANDO VALOR DE INPUT
+------------------------
+let valor = document.getElementById("cep").value;
+
+Para alterar texto:
+element.innerText = "Novo texto";
+
+Para inserir HTML:
+element.innerHTML = "<strong>Olá</strong>";
+
+innerText trata como texto.
+innerHTML interpreta tags HTML.
+
+CRIANDO ELEMENTOS
+-----------------
+const card = document.createElement("div");
+card.className = "card";
+card.innerHTML = "...";
+cards.appendChild(card);
+
+createElement cria um elemento.
+appendChild adiciona o elemento como filho.
+
+ATRIBUTOS
+---------
+elemento.id
+elemento.className
+elemento.value
+elemento.src
+
+Também:
+elemento.setAttribute("nome", "valor");
+
+==============================================================
+8. EVENTOS
+==============================================================
+
+Eventos são ações ocorridas no navegador.
+
+Exemplos:
+click
+submit
+change
+input
+DOMContentLoaded
+mouseover
+keydown
+
+INLINE
+------
+<button onclick="consultarCEP()">Consultar</button>
+
+O código do projeto utiliza bastante onclick.
+
+ADDEVENTLISTENER
+----------------
+document.addEventListener("DOMContentLoaded", getPosts);
+
+Significa:
+quando o HTML terminar de ser carregado, execute getPosts.
+
+Outro exemplo:
+element.addEventListener("click", () => {
+    ...
+});
+
+Vantagem:
+separa o JavaScript do HTML.
+
+SUBMIT
+------
+Um formulário dispara o evento submit.
+
+Para impedir o comportamento padrão:
+event.preventDefault();
+
+Exemplo:
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    ...
+});
+
+IMPORTANTE SOBRE O PROJETO:
+Há casos como:
+<input type="submit" onclick="...">
+
+e casos em que aparece onsubmit no input. O evento submit pertence ao
+FORM, não ao botão. O padrão correto é tratar o submit no <form> ou usar
+onclick no botão quando a intenção for apenas tratar o clique.
+
+==============================================================
+9. PROPAGAÇÃO DE EVENTOS
+==============================================================
+
+Um evento pode se propagar pela árvore DOM.
+
+BUBBLING:
+- o evento começa no elemento mais interno;
+- depois sobe para os elementos pais.
+
+CAPTURING:
+- o evento percorre os pais em direção ao alvo antes de chegar nele.
+
+event.target:
+- elemento que realmente originou o evento.
+
+event.currentTarget:
+- elemento no qual o listener está sendo executado.
+
+Para interromper propagação:
+event.stopPropagation();
+
+==============================================================
+10. ARRAYS E ITERAÇÃO
+==============================================================
+
+Array:
+const frutas = ["maçã", "banana", "uva"];
+
+Acesso:
+frutas[0]
+
+Quantidade:
+frutas.length
+
+for clássico:
+for (let i = 0; i < frutas.length; i++) {
+    console.log(frutas[i]);
+}
+
+for...of:
+for (let fruta of frutas) {
+    console.log(fruta);
+}
+
+forEach:
+frutas.forEach(fruta => {
+    console.log(fruta);
+});
+
+No projeto:
+posts.forEach(post => {
+    ...
+});
+
+Isso executa uma função para cada item do array.
+
+==============================================================
+11. OBJETOS
+==============================================================
+
+Objeto:
+const pessoa = {
+    nome: "Ana",
+    idade: 20
+};
+
+Acesso:
+pessoa.nome
+pessoa["nome"]
+
+No projeto:
+dados[atributo]
+
+Isso permite acessar uma propriedade dinamicamente.
+
+Object.keys():
+const atributos = Object.keys(dados);
+
+Retorna um array com os nomes das propriedades.
+
+for...in:
+for (let atributo in dados) {
+    console.log(atributo, dados[atributo]);
+}
+
+Percorre as propriedades enumeráveis de um objeto.
+
+==============================================================
+12. JSON
+==============================================================
+
+JSON = JavaScript Object Notation.
+
+É um formato textual muito usado para trocar dados entre aplicações e APIs.
+
+Objeto JS:
+const pessoa = {
+    nome: "Ana",
+    idade: 20
+};
+
+Converter objeto para JSON:
+JSON.stringify(pessoa);
+
+Converter JSON para objeto:
+JSON.parse(texto);
+
+EXEMPLO:
+localStorage.setItem("dados", JSON.stringify(dados));
+
+Depois:
+const dados = JSON.parse(localStorage.getItem("dados"));
+
+IMPORTANTE:
+localStorage/sessionStorage armazenam strings.
+Por isso objetos precisam de JSON.stringify().
+Ao recuperar, usa-se JSON.parse().
+
+==============================================================
+13. LOCALSTORAGE E SESSIONSTORAGE
+==============================================================
+
+localStorage:
+- mantém os dados mesmo depois de fechar o navegador;
+- permanece até ser removido.
+
+sessionStorage:
+- mantém os dados durante a sessão/aba;
+- normalmente é encerrado quando a sessão da aba termina.
+
+MÉTODOS
+-------
+setItem:
+localStorage.setItem("chave", "valor");
+
+getItem:
+localStorage.getItem("chave");
+
+removeItem:
+localStorage.removeItem("chave");
+
+clear:
+localStorage.clear();
+
+Mesmos métodos para sessionStorage.
+
+PROJETO AULA 4
+--------------
+Endereço:
+const endereco = {
+    rua: ...,
+    cidade: ...,
+    estado: ...,
+    cep: ...
+};
+
+sessionStorage.setItem(
+    "endereco",
+    JSON.stringify(endereco)
+);
+
+Recuperação:
+let endereco = JSON.parse(
+    sessionStorage.getItem("endereco")
+);
+
+PROJETO AULA 5
+--------------
+Objeto inicial:
+let dados = JSON.parse(localStorage.getItem("dados")) || {
+    tipo: null,
+    dataehora: null,
+    local: null,
+    envolvidos: null,
+    objetos: null,
+    relato: null,
+    aceita: false
+};
+
+O operador || significa:
+se o primeiro valor for falsy, utiliza o segundo.
+
+saveData:
+function saveData(elemento, atributo){
+    dados[atributo] = elemento;
+    localStorage.setItem("dados", JSON.stringify(dados));
+}
+
+Isso:
+1. altera uma propriedade do objeto;
+2. transforma o objeto em JSON;
+3. salva no localStorage.
+
+==============================================================
+14. NULL, UNDEFINED E FALSY
+==============================================================
+
+null:
+- representa ausência intencional de valor.
+
+undefined:
+- normalmente significa que um valor não foi definido.
+
+Falsy:
+valores tratados como falso em contextos booleanos:
+false
+0
+""
+null
+undefined
+NaN
+
+Exemplo:
+let dados = JSON.parse(...) || objetoPadrao;
+
+Se JSON.parse(...) retornar null, será usado objetoPadrao.
+
+==============================================================
+15. FETCH API
+==============================================================
+
+fetch() faz requisições HTTP e retorna uma Promise.
+
+Exemplo:
+fetch("https://exemplo.com/api")
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error(error);
+    });
+
+FLUXO:
+fetch()
+  ↓
+Promise<Response>
+  ↓
+response.json()
+  ↓
+Promise com dados JavaScript
+  ↓
+.then(data => ...)
+
+response.json() também é assíncrono.
+
+TRATAMENTO DE ERRO
+------------------
+.catch(error => {
+    console.error(error);
+});
+
+==============================================================
+16. PROMISES E .THEN()
+==============================================================
+
+Promise representa o resultado futuro de uma operação assíncrona.
+
+Estados:
+- pending
+- fulfilled
+- rejected
+
+.then() executa quando a Promise é resolvida.
+
+.catch() trata rejeição/erro.
+
+Exemplo:
+fetch(url)
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.log(error));
+
+Também existe async/await:
+
+async function carregar() {
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+==============================================================
+17. API E REST
+==============================================================
+
+API = Application Programming Interface.
+
+Permite que um sistema converse com outro.
+
+Exemplo do projeto:
+ViaCEP
+https://viacep.com.br/ws/CEP/json/
+
+O JavaScript envia uma requisição e recebe dados JSON.
+
+REST é um estilo arquitetural muito utilizado para APIs HTTP.
+
+MÉTODOS HTTP
+------------
+GET     buscar dados.
+POST    criar/enviar dados.
+PUT     atualizar recurso inteiro.
+PATCH   atualizar parcialmente.
+DELETE  remover recurso.
+
+STATUS HTTP COMUNS
+------------------
+200 OK
+201 Created
+400 Bad Request
+401 Unauthorized
+403 Forbidden
+404 Not Found
+500 Internal Server Error
+
+IMPORTANTE:
+fetch() não necessariamente rejeita a Promise apenas porque o servidor
+retornou 404/500. Para verificar isso:
+
+if (!response.ok) {
+    throw new Error("Erro HTTP: " + response.status);
+}
+
+==============================================================
+18. API VIA CEP – PROJETO
+==============================================================
+
+Código principal:
+
+let cep = document.getElementById("cep").value.replace(/\D/g, '');
+
+replace(/\D/g, '')
+remove tudo que NÃO for dígito.
+
+Assim:
+"88330-000" -> "88330000"
+
+Validação:
+if (cep.length !== 8) {
+    alert("CEP inválido!");
+    return;
+}
+
+URL:
+https://viacep.com.br/ws/" + cep + "/json/
+
+Depois:
+fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        ...
+    });
+
+Campos usados:
+data.cep
+data.uf
+data.localidade
+data.bairro
+data.logradouro
+
+Resultado:
+document.getElementById("resultado").innerHTML = resultado;
+
+==============================================================
+19. TEMPLATE LITERALS
+==============================================================
+
+Template literal usa crases:
+
+const nome = "Ana";
+const texto = `Olá, ${nome}!`;
+
+Permite interpolar valores com ${...}.
+
+No projeto:
+const resultado = `CEP: ${cep}
+UF: ${uf}
+Cidade: ${localidade}`;
+
+Também pode gerar HTML:
+card.innerHTML = `
+    <img src="${imagem}">
+    <h2>${titulo}</h2>
+`;
+
+==============================================================
+20. REGEX USADA NO CEP
+==============================================================
+
+/\D/g
+
+\D = qualquer caractere que NÃO seja dígito.
+g = global, procura todas as ocorrências.
+
+replace(/\D/g, '')
+remove caracteres não numéricos.
+
+Exemplos:
+"123.456.789-00" -> "12345678900"
+"abc123" -> "123"
+
+==============================================================
+21. API JSONPLACEHOLDER – POSTS
+==============================================================
+
+URL:
+https://jsonplaceholder.typicode.com/posts
+
+A resposta é um array de objetos.
+
+Estrutura típica:
+{
+    userId: 1,
+    id: 1,
+    title: "...",
+    body: "..."
+}
+
+Código:
+fetch(...)
+    .then(response => response.json())
+    .then(posts => {
+        posts.forEach(post => {
+            ...
+        });
+    });
+
+Para cada post:
+post.id
+post.userId
+post.title
+post.body
+
+CRIAÇÃO DO CARD
+---------------
+const card = document.createElement("div");
+card.className = "card";
+
+card.innerHTML = `
+    ...
+`;
+
+cards.appendChild(card);
+
+==============================================================
+22. POKEAPI – EXEMPLO COM REQUISIÇÕES ENCADEADAS
+==============================================================
+
+Primeiro:
+fetch("https://pokeapi.co/api/v2/pokemon/?limit=50")
+
+Depois:
+posts.results.forEach(post => {
+    fetch(post.url)
+        .then(response => response.json())
+        .then(pokemon => {
+            ...
+        });
+});
+
+A primeira API fornece uma lista com URLs dos Pokémon.
+
+Depois é feita outra requisição para obter os dados de cada Pokémon.
+
+No exemplo:
+pokemon.id
+pokemon.name
+pokemon.height
+pokemon.weight
+
+Depois ainda existe uma requisição para:
+https://pokeapi.co/api/v2/pokemon-form/${pokemon.id}/
+
+E é usado:
+form.sprites.front_default
+
+IDEIA IMPORTANTE:
+Uma API pode retornar links para outros recursos. O programa pode usar
+esses links para fazer novas requisições.
+
+==============================================================
+23. BOAS PRÁTICAS COM FETCH
+==============================================================
+
+Estrutura recomendada:
+
+fetch(url)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        // usar dados
+    })
+    .catch(error => {
+        // tratar erro
+    });
+
+Ou async/await com try/catch.
+
+Sempre considerar:
+- conexão pode falhar;
+- API pode retornar erro;
+- JSON pode estar inválido;
+- dados podem não existir;
+- resposta pode não possuir o campo esperado.
+
+==============================================================
+24. BOOTSTRAP
+==============================================================
+
+Bootstrap é um framework CSS/JS.
+
+No projeto de consulta de CEP:
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" ...>
+
+CLASSES UTILIZADAS
+------------------
+container
+- cria um contêiner com largura e espaçamento adequados.
+
+row
+- linha do sistema de grid.
+
+justify-content-center
+- centraliza no eixo horizontal.
+
+mt-5
+- margin-top.
+
+col-8
+- ocupa 8 de 12 colunas.
+
+card
+- componente visual de cartão.
+
+shadow
+- sombra.
+
+card-header
+- cabeçalho do cartão.
+
+card-body
+- corpo do cartão.
+
+form-control
+- estilo de input.
+
+input-group
+- agrupa input e botão.
+
+btn
+- estilo de botão.
+
+btn-primary
+- variação primária do botão.
+
+Bootstrap evita precisar escrever todo o CSS do zero.
+
+==============================================================
+25. CSS DO SISTEMA DE CARDS
+==============================================================
+
+No projeto de posts/Pokémon:
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+Isso cria uma galeria flexível.
+
+.card {
+    width: 100%;
+    max-width: 350px;
+}
+
+Assim:
+- em espaços pequenos, pode ocupar até 100%;
+- não ultrapassa 350px.
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+object-fit: cover:
+- preenche a área;
+- pode cortar parte da imagem para manter proporção.
+
+==============================================================
+26. PROJETO AULA 4 – FLUXO DE DADOS
+==============================================================
+
+Página 1:
+endereco.html
+
+Usuário preenche:
+rua
+cidade
+estado
+cep
+
+salvarEndereco() cria objeto e salva no sessionStorage.
+
+Página 2:
+produtos.html
+
+Usuário escolhe quantidade.
+
+precos:
+hav = 50.00
+alp = 75.00
+
+atualizarPreco(produto):
+1. obtém quantidade;
+2. converte para inteiro;
+3. pega preço com precos[produto];
+4. multiplica;
+5. altera o HTML.
+
+Exemplo:
+let quantidade = parseInt(
+    document.getElementById(produto + "_quantidade").value
+);
+
+let precoTotal = quantidade * precos[produto];
+
+Depois:
+document.getElementById(produto + "_preco").innerText =
+    `R$ ${precoTotal}`;
+
+Página 3:
+resumo.html
+
+Recupera endereço e produtos do sessionStorage.
+
+JSON.parse() transforma strings em objetos.
+
+parseFloat() transforma preço textual em número.
+
+replace('R$ ', '') remove o prefixo.
+
+total:
+let total = hav_preco + alp_preco;
+
+==============================================================
+27. CUIDADO COM sessionStorage NO PROJETO
+==============================================================
+
+Existe uma inconsistência no arquivo endereco.js.
+
+O objeto inteiro é salvo:
+sessionStorage.setItem("endereco", JSON.stringify(endereco));
+
+Mas a função carregarEndereco() tenta recuperar:
+sessionStorage.getItem("rua")
+sessionStorage.getItem("cidade")
+etc.
+
+Isso não funciona porque as chaves salvas são apenas:
+"endereco"
+
+O correto seria:
+const endereco = JSON.parse(sessionStorage.getItem("endereco"));
+
+Depois:
+endereco.rua
+endereco.cidade
+endereco.estado
+endereco.cep
+
+LIÇÃO:
+Se salvar um objeto inteiro em uma chave, depois recupere a mesma chave e
+faça JSON.parse().
+
+==============================================================
+28. PROJETO AULA 5 – FORMULÁRIO MULTIETAPAS
+==============================================================
+
+Fluxo:
+
+denuncia.html
+    ↓
+acidente.html / agro.html / dano.html / fala.html
+    ↓
+dataehora.html
+    ↓
+local.html
+    ↓
+envolvidos.html
+    ↓
+veiculos.html
+    ↓
+relato.html
+    ↓
+confirmacao.html
+
+A ideia é coletar informações em várias páginas.
+
+O objeto compartilhado:
+{
+    tipo: null,
+    dataehora: null,
+    local: null,
+    envolvidos: null,
+    objetos: null,
+    relato: null,
+    aceita: false
+}
+
+O localStorage mantém os dados entre as páginas.
+
+==============================================================
+29. saveData() – AULA 5
+==============================================================
+
+function saveData(elemento, atributo){
+    dados[atributo] = elemento;
+    localStorage.setItem("dados", JSON.stringify(dados));
+}
+
+Exemplo conceitual:
+saveData("acidente", "tipo");
+
+Resultado:
+dados.tipo = "acidente"
+
+Outro:
+saveData("15/09/2026 14:00", "dataehora");
+
+Resultado:
+dados.dataehora = "15/09/2026 14:00"
+
+A função é genérica porque recebe o atributo que será alterado.
+
+==============================================================
+30. showData() – AULA 5
+==============================================================
+
+function showData(){
+    let resultado = document.getElementById("final");
+
+    for (let atributo in dados){
+        resultado.innerHTML +=
+            atributo + ": " + dados[atributo] + "<br>";
+    }
+}
+
+for...in percorre os atributos do objeto.
+
+dados[atributo] usa acesso dinâmico.
+
+Se atributo = "tipo":
+dados[atributo] equivale a:
+dados["tipo"]
+
+IMPORTANTE:
+dados.atributo NÃO significa a mesma coisa.
+Isso procuraria literalmente uma propriedade chamada "atributo".
+
+==============================================================
+31. ERROS IMPORTANTES ENCONTRADOS NO PROJETO
+==============================================================
+
+1) querySelectorAll retorna vários elementos.
+
+Exemplo problemático:
+const elementos = document.querySelectorAll("seletor");
+elementos.addEventListener(...);
+
+NodeList não possui addEventListener diretamente.
+
+Para cada elemento:
+elementos.forEach(elemento => {
+    elemento.addEventListener("click", ...);
+});
+
+Ou, se só existe um elemento, use querySelector().
+
+2) Seletor inválido/sem elemento:
+document.querySelectorAll("sdnfdfmg")
+
+Se a intenção era selecionar uma classe, deveria ser:
+document.querySelectorAll(".classe")
+
+Se era um id:
+document.querySelectorAll("#id")
+
+3) IDs com #:
+id="text" está correto.
+querySelector("#text") usa #.
+Não:
+id="#text"
+
+4) onsubmit no input:
+O submit pertence ao formulário.
+Preferível:
+<form onsubmit="...">
+ou addEventListener("submit", ...)
+
+5) Variável não definida:
+onclick="saveData(relato, 'relato')"
+
+Se "relato" não for uma variável contendo o valor, haverá erro.
+Normalmente:
+document.getElementById("text").value
+
+6) submit pode recarregar/trocar a página.
+Para impedir:
+event.preventDefault();
+
+7) <spam> usado no projeto.
+A tag HTML correta provavelmente seria <span>.
+<spam> não é a tag semântica padrão para esse uso.
+
+8) Atributo id duplicado:
+<footer id="inscricao" id="#inscricao">
+
+Um elemento não deve ter dois atributos id.
+Correto:
+<footer id="inscricao">
+
+9) Âncoras:
+id="#inscricao" está errado.
+Correto:
+id="inscricao"
+e:
+href="#inscricao"
+
+10) Links sem aspas:
+<a href=index.html>
+Funciona em muitos casos, mas a forma correta é:
+<a href="index.html">
+
+11) HTML antigo:
+<font>, bgcolor etc. aparecem nos arquivos antigos.
+Atualmente, apresentação deve ser feita com CSS.
+
+12) console.log:
+É ótimo para depuração, mas não substitui mostrar o resultado na interface.
+
+==============================================================
+32. DIFERENÇA ENTRE .VALUE E .INNERHTML/.INNERTEXT
+==============================================================
+
+Para input:
+document.getElementById("nome").value
+
+Para elemento HTML:
+document.getElementById("resultado").innerText
+
+ou:
+document.getElementById("resultado").innerHTML
+
+Exemplo:
+<input id="nome">
+
+let nome = document.getElementById("nome").value;
+
+Já:
+<div id="resultado"></div>
+
+document.getElementById("resultado").innerText = "Olá";
+
+REGRA PRÁTICA:
+input/textarea/select -> .value
+elemento visual -> .innerText ou .innerHTML
+
+==============================================================
+33. innerText x innerHTML
+==============================================================
+
+innerText:
+element.innerText = "<b>Olá</b>";
+
+Mostra literalmente:
+<b>Olá</b>
+
+innerHTML:
+element.innerHTML = "<b>Olá</b>";
+
+Interpreta a tag e deixa "Olá" em negrito.
+
+Cuidado com innerHTML quando dados externos não são confiáveis, pois inserir
+HTML diretamente pode causar problemas de segurança (XSS).
+
+==============================================================
+34. parseInt E parseFloat
+==============================================================
+
+parseInt("10") -> 10
+parseFloat("10.50") -> 10.5
+
+No projeto:
+let quantidade = parseInt(valor);
+
+Para preços:
+parseFloat(preco.replace("R$ ", ""));
+
+Também existe:
+Number("10.5")
+
+==============================================================
+35. CONCATENAÇÃO E TEMPLATE LITERAL
+==============================================================
+
+Concatenação:
+"Olá " + nome
+
+Template literal:
+`Olá ${nome}`
+
+Com várias linhas:
+`Linha 1
+Linha 2
+Linha 3`
+
+Template literals são muito úteis para gerar HTML e mensagens.
+
+==============================================================
+36. CARREGAMENTO DO JAVASCRIPT
+==============================================================
+
+Se o script executa antes do HTML existir, elementos podem não ser encontrados.
+
+Soluções:
+
+1) colocar <script> no final do body;
+
+2) usar:
+document.addEventListener("DOMContentLoaded", () => {
+    ...
+});
+
+3) usar defer:
+<script src="script.js" defer></script>
+
+No projeto de API:
+document.addEventListener("DOMContentLoaded", getPosts);
+
+Isso garante que o DOM esteja carregado antes de executar getPosts().
+
+==============================================================
+37. HTML SEMÂNTICO
+==============================================================
+
+HTML semântico usa tags que indicam o significado do conteúdo.
+
+<header>
+<nav>
+<main>
+<section>
+<article>
+<footer>
+
+Vantagens:
+- melhor acessibilidade;
+- melhor organização;
+- facilita manutenção;
+- ajuda mecanismos de busca.
+
+<div> é genérico e deve ser usado quando não existe um elemento semântico
+mais adequado.
+
+==============================================================
+38. ACESSIBILIDADE
+==============================================================
+
+Boas práticas presentes ou relacionadas ao projeto:
+
+- usar alt em imagens;
+- usar label associado a input;
+- manter estrutura de títulos;
+- usar elementos semânticos;
+- garantir que botões/links tenham função clara;
+- não depender somente de cor para transmitir informação.
+
+Exemplo:
+<label for="cep">CEP</label>
+<input id="cep">
+
+==============================================================
+39. CAMINHOS DE ARQUIVOS
+==============================================================
+
+Relativo:
+href="index.html"
+
+Arquivo em pasta:
+src="scripts/posts.js"
+
+Subir uma pasta:
+../arquivo.html
+
+Raiz do site:
+/
+
+No projeto:
+aula6/scripts/cep.js
+é diferente de:
+aula6/pokemon/scripts/posts.js
+
+Sempre observar a posição do arquivo HTML e a posição do recurso.
+
+==============================================================
+40. ESTRUTURA GERAL DO CLONE DE CHATGPT
+==============================================================
+
+O projeto possui:
+- HTML para estrutura;
+- CSS para layout;
+- sidebar;
+- área de chat;
+- formulário de mensagem;
+- botões;
+- imagens;
+- variáveis CSS.
+
+Estrutura conceitual:
+
+<body>
+    <header>
+        menu lateral
+    </header>
+
+    <main>
+        área de mensagens
+        formulário
+    </main>
+</body>
+
+CSS:
+body {
+    display: flex;
+}
+
+header {
+    width: 20vw;
+}
+
+main {
+    width: 80vw;
+}
+
+Isso cria um layout lateral usando Flexbox.
+
+==============================================================
+41. PSEUDO-CLASSES E PSEUDO-ELEMENTOS
+==============================================================
+
+:hover:
+aplica estilo quando o mouse está sobre o elemento.
+
+:active:
+aplica enquanto o elemento está sendo ativado/clicado.
+
+:focus:
+aplica quando o elemento recebe foco.
+
+Exemplo:
+.button:hover {
+    background: var(--cinza-5);
+}
+
+Pseudo-elemento:
+#newChat::after {
+    content: "Novo chat";
+}
+
+::after cria conteúdo virtual depois do conteúdo do elemento.
+
+==============================================================
+42. CASCATA E ESPECIFICIDADE
+==============================================================
+
+Quando várias regras CSS afetam o mesmo elemento, entram em jogo:
+- importância;
+- especificidade;
+- ordem das regras.
+
+De forma simplificada:
+inline > id > class/pseudo-class/atributo > elemento
+
+Exemplo:
+#titulo { color: red; }
+.titulo { color: blue; }
+
+Se o elemento tiver id="titulo" e class="titulo", a regra do id normalmente
+tem maior especificidade.
+
+Evite usar !important sem necessidade.
+
+==============================================================
+43. ARQUITETURA MENTAL PARA QUESTÕES DE PROVA
+==============================================================
+
+SE A QUESTÃO FALAR DE HTML:
+pense em:
+- estrutura;
+- tags;
+- atributos;
+- formulários;
+- semântica.
+
+SE FALAR DE CSS:
+pense em:
+- seletor;
+- box model;
+- display;
+- flexbox;
+- position;
+- responsividade;
+- especificidade.
+
+SE FALAR DE JAVASCRIPT:
+pense em:
+- variável;
+- função;
+- condição;
+- objeto;
+- array;
+- DOM;
+- evento.
+
+SE FALAR DE FORMULÁRIO:
+pense em:
+- form;
+- input;
+- label;
+- value;
+- submit;
+- required;
+- action;
+- method;
+- preventDefault.
+
+SE FALAR DE API:
+pense em:
+- fetch;
+- Promise;
+- response;
+- response.json();
+- .then();
+- .catch();
+- HTTP;
+- JSON.
+
+SE FALAR DE ARMAZENAMENTO:
+pense em:
+- localStorage;
+- sessionStorage;
+- setItem;
+- getItem;
+- JSON.stringify;
+- JSON.parse.
+
+==============================================================
+44. RECEITAS RÁPIDAS PARA CONSULTA
+==============================================================
+
+PEGAR VALOR DE INPUT:
+const valor = document.getElementById("campo").value;
+
+ALTERAR TEXTO:
+document.getElementById("resultado").innerText = "Olá";
+
+ALTERAR HTML:
+document.getElementById("resultado").innerHTML = "<b>Olá</b>";
+
+CRIAR ELEMENTO:
+const div = document.createElement("div");
+
+ADICIONAR CLASSE:
+div.className = "card";
+
+ADICIONAR AO DOM:
+document.getElementById("posts").appendChild(div);
+
+EVENTO:
+element.addEventListener("click", () => {
+    ...
+});
+
+FORM:
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+});
+
+SALVAR STRING:
+localStorage.setItem("nome", "Diogo");
+
+SALVAR OBJETO:
+localStorage.setItem("pessoa", JSON.stringify(pessoa));
+
+RECUPERAR STRING:
+const nome = localStorage.getItem("nome");
+
+RECUPERAR OBJETO:
+const pessoa = JSON.parse(localStorage.getItem("pessoa"));
+
+FETCH:
+fetch(url)
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+
+FOR EACH:
+array.forEach(item => {
+    ...
+});
+
+TEMPLATE:
+const html = `<p>${valor}</p>`;
+
+NÚMERO:
+parseInt(valor)
+parseFloat(valor)
+
+REMOVER NÃO-DÍGITOS:
+valor.replace(/\D/g, '')
+
+==============================================================
+45. EXEMPLO COMPLETO – API + DOM
+==============================================================
+
+const carregar = function () {
+
+    fetch("https://exemplo.com/api")
+        .then(response => {
+
+            if (!response.ok) {
+                throw new Error("Erro HTTP: " + response.status);
+            }
+
+            return response.json();
+        })
+        .then(dados => {
+
+            const container =
+                document.getElementById("posts");
+
+            dados.forEach(item => {
+
+                const card =
+                    document.createElement("div");
+
+                card.className = "card";
+
+                card.innerHTML = `
+                    <h2>${item.title}</h2>
+                    <p>${item.body}</p>
+                `;
+
+                container.appendChild(card);
+            });
+        })
+        .catch(error => {
+            console.error(error);
+        });
+};
+
+document.addEventListener(
+    "DOMContentLoaded",
+    carregar
+);
+
+FLUXO PARA DECORAR:
+HTML
+ ↓
+DOM
+ ↓
+JS seleciona elemento
+ ↓
+fetch API
+ ↓
+Promise
+ ↓
+response.json()
+ ↓
+dados
+ ↓
+forEach
+ ↓
+createElement
+ ↓
+innerHTML
+ ↓
+appendChild
+ ↓
+página atualizada
+
+==============================================================
+46. PRINCIPAIS PEGADINHAS
+==============================================================
+
+- id NÃO recebe #. O # é usado no seletor CSS.
+- class recebe o nome da classe; o . é usado no seletor.
+- .value é usado para obter valor de inputs.
+- innerText/innerHTML são usados para conteúdo de elementos.
+- localStorage/sessionStorage armazenam strings.
+- objeto -> JSON.stringify().
+- JSON -> objeto com JSON.parse().
+- fetch é assíncrono.
+- response.json() também é assíncrono.
+- .then() trabalha com o resultado de uma Promise.
+- .catch() trata rejeições.
+- querySelector pega um elemento.
+- querySelectorAll pega vários.
+- NodeList não deve ser tratado como um único elemento.
+- submit é evento do formulário.
+- required faz validação HTML básica.
+- preventDefault() impede o comportamento padrão do evento.
+- parseInt é usado para inteiros.
+- parseFloat para números decimais.
+- === é comparação estrita.
+- && = E.
+- || = OU.
+- ! = negação.
+- forEach percorre arrays.
+- for...in percorre propriedades de objetos.
+- for...of percorre valores iteráveis.
+- appendChild adiciona um nó ao DOM.
+- createElement cria um nó.
+- className altera a classe do elemento.
+- innerHTML interpreta HTML.
+- alt melhora acessibilidade das imagens.
+- Flexbox usa justify-content no eixo principal e align-items no eixo
+  transversal.
+- flex-wrap permite quebra de linha.
+- box-sizing: border-box facilita o controle de dimensões.
+- CSS externo geralmente é preferível a CSS inline.
+
+==============================================================
+47. MAPA MENTAL FINAL
+==============================================================
+
+HTML
+|
++-- estrutura
+|   +-- head
+|   +-- body
+|   +-- header/nav/main/section/footer
+|
++-- conteúdo
+|   +-- textos
+|   +-- links
+|   +-- imagens
+|   +-- tabelas
+|   +-- formulários
+|
+CSS
+|
++-- seletores
++-- box model
++-- cores/fontes
++-- display
++-- Flexbox
++-- position
++-- responsividade
++-- pseudo-classes
++-- variáveis CSS
+|
+JavaScript
+|
++-- variáveis
++-- tipos
++-- operadores
++-- funções
++-- arrays
++-- objetos
++-- DOM
++-- eventos
++-- JSON
++-- storage
++-- Fetch
++-- Promises
+|
+APIs
+|
++-- HTTP
++-- GET/POST/PUT/PATCH/DELETE
++-- JSON
++-- response
++-- response.json()
++-- status HTTP
++-- tratamento de erros
+|
+ARMAZENAMENTO
+|
++-- localStorage
+|   +-- setItem
+|   +-- getItem
+|   +-- removeItem
+|
++-- sessionStorage
+    +-- setItem
+    +-- getItem
+    +-- removeItem
+
+==============================================================
+48. CHECKLIST ANTES DA PROVA
+==============================================================
+
+[ ] Sei montar a estrutura básica HTML.
+[ ] Sei diferenciar id e class.
+[ ] Sei usar href e src.
+[ ] Sei usar label + for + id.
+[ ] Sei os principais tipos de input.
+[ ] Sei o que required faz.
+[ ] Sei diferença entre GET e POST.
+[ ] Sei explicar box model.
+[ ] Sei usar display:flex.
+[ ] Sei explicar justify-content e align-items.
+[ ] Sei explicar flex-wrap.
+[ ] Sei usar seletores de classe e id.
+[ ] Sei explicar :hover, :focus e :active.
+[ ] Sei usar let e const.
+[ ] Sei criar funções.
+[ ] Sei trabalhar com arrays e objetos.
+[ ] Sei usar forEach.
+[ ] Sei selecionar elementos pelo DOM.
+[ ] Sei obter .value de input.
+[ ] Sei alterar innerText/innerHTML.
+[ ] Sei criar elementos com createElement.
+[ ] Sei adicionar elementos com appendChild.
+[ ] Sei usar addEventListener.
+[ ] Sei explicar submit e preventDefault.
+[ ] Sei explicar bubbling.
+[ ] Sei usar JSON.stringify().
+[ ] Sei usar JSON.parse().
+[ ] Sei diferenciar localStorage e sessionStorage.
+[ ] Sei usar setItem/getItem.
+[ ] Sei explicar fetch.
+[ ] Sei explicar Promise.
+[ ] Sei usar .then() e .catch().
+[ ] Sei verificar response.ok.
+[ ] Sei explicar response.json().
+[ ] Sei interpretar uma resposta JSON de API.
+[ ] Sei usar template literals.
+[ ] Sei usar parseInt/parseFloat.
+[ ] Sei entender replace(/\D/g, '').
+[ ] Sei explicar o fluxo de uma API até a criação de um card.
+[ ] Sei identificar erros comuns de DOM e eventos.
+
+FIM DA REVISÃO
