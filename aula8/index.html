@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniFlix - Catálogo de Filmes e Séries</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #141414;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #e50914;
+            text-align: center;
+        }
+
+        .filtros {
+            background-color: #222;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .filtros input,
+        .filtros button {
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: none;
+            font-size: 14px;
+        }
+
+        .filtros input {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .filtros button {
+            background-color: #e50914;
+            color: #fff;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .filtros button:hover {
+            background-color: #b20710;
+        }
+
+        #container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #1f1f1f;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card h2 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            align-self: flex-start;
+        }
+
+        .badge-filme {
+            background-color: #007bff;
+        }
+
+        .badge-serie {
+            background-color: #28a745;
+        }
+
+        .detalhes {
+            font-size: 13px;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .resumo {
+            font-size: 14px;
+            color: #ddd;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>UniFlix</h1>
+
+    <!-- Área de Filtros -->
+    <div class="filtros">
+        <button onclick="carregarItens('/itens')">Mostrar Todos</button>
+
+        <input type="number" id="inputId" placeholder="Buscar por ID">
+        <button onclick="filtrarPorId()">Buscar ID</button>
+
+        <input type="number" id="inputAno" placeholder="Ano ex: 2010">
+        <button onclick="filtrarPorAno()">Buscar Ano</button>
+
+        <input type="number" id="inputInicio" placeholder="Ano Início" style="width: 80px;">
+        <input type="number" id="inputFim" placeholder="Ano Fim" style="width: 80px;">
+        <button onclick="filtrarPorIntervalo()">Buscar Intervalo</button>
+
+        <input type="text" id="inputGenero" placeholder="ex: Terror">
+        <button onclick="filtrarPorGenero()">Buscar Gênero</button>
+    </div>
+
+    <!-- Container dos Cards -->
+    <div id="container"></div>
+
+    <script>
+        const container = document.getElementById('container');
+
+        // Função para limpar todos os campos de busca
+        function limparInputs() {
+            document.getElementById('inputId').value = '';
+            document.getElementById('inputAno').value = '';
+            document.getElementById('inputInicio').value = '';
+            document.getElementById('inputFim').value = '';
+            document.getElementById('inputGenero').value = '';
+        }
+
+        // Função genérica para buscar dados da API e renderizar na tela
+        function carregarItens(url) {
+            // Limpa os campos de busca ao executar a busca
+            limparInputs();
+
+            container.innerHTML = '<p style="text-align:center;">Carregando...</p>';
+
+            fetch(url)
+                .then(res => {
+                    if (!res.ok) throw new Error("Item não encontrado");
+                    return res.json();
+                })
+                .then(dados => {
+                    // Se for um único objeto (ex: buscar por ID), transforma em lista para reutilizar o forEach
+                    const itens = Array.isArray(dados) ? dados : [dados];
+
+                    if (itens.length === 0) {
+                        container.innerHTML = '<p style="text-align:center; grid-column: 1/-1;">Nenhum item encontrado.</p>';
+                        return;
+                    }
+
+                    container.innerHTML = '';
+                    itens.forEach(item => {
+                        const tipoBadge = item.tipo === 'filme'
+                            ? '<span class="badge badge-filme">Filme</span>'
+                            : '<span class="badge badge-serie">Série</span>';
+
+                        container.innerHTML += `
+                            <div class="card">
+                                <img src="${item.imagem}" alt="${item.titulo}">
+                                <div class="card-content">
+                                    ${tipoBadge}
+                                    <h2>${item.titulo}</h2>
+                                    <div class="detalhes">
+                                        <strong>ID:</strong> ${item.id} | 
+                                        <strong>Ano:</strong> ${item.ano} | 
+                                        <strong>Gênero:</strong> ${item.genero}
+                                    </div>
+                                    <p class="resumo">${item.resumo}</p>
+                                </div>
+                            </div>
+                        `;
+                    });
+                })
+                .catch(err => {
+                    container.innerHTML = `<p style="text-align:center; grid-column: 1/-1; color: #e50914;">${err.message}</p>`;
+                });
+        }
+
+        // Funções acionadas pelos botões de filtro
+        function filtrarPorId() {
+            const id = document.getElementById('inputId').value;
+            if (id) carregarItens(`/itens/${id}`);
+        }
+
+        function filtrarPorAno() {
+            const ano = document.getElementById('inputAno').value;
+            if (ano) carregarItens(`/itens/ano/${ano}`);
+        }
+
+        function filtrarPorIntervalo() {
+            const inicio = document.getElementById('inputInicio').value;
+            const fim = document.getElementById('inputFim').value;
+            if (inicio && fim) carregarItens(`/itens/intervalo/${inicio}/${fim}`);
+        }
+
+        function filtrarPorGenero() {
+            const genero = document.getElementById('inputGenero').value;
+            if (genero) carregarItens(`/itens/genero/${genero}`);
+        }
+
+        // Carrega todos os itens assim que a página abre
+        carregarItens('/itens');
+    </script>
+
+</body>
+
+</html>
