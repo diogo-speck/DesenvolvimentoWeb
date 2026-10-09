@@ -1,137 +1,121 @@
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import express from "express";
+import dotenv from "dotenv";
+import conectarAoBanco from "../aula9/src/config/dbcongig.js";
+
+dotenv.config({ path: "./aula9/.env" });
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
+
 app.use(express.json());
+app.use(express.static(__dirname));
 
-// Permite servir arquivos estáticos caso você use um index.html
-app.use(express.static("."));
+let conexao;
 
-// Dados de filmes e séries da UniFlix
-const uniflix = [
-  {
-    id: 1,
-    titulo: "Inception",
-    tipo: "filme",
-    ano: 2010,
-    genero: "Ficção Científica",
-    imagem: "https://picsum.photos/300/400?random=1",
-    resumo: "Um ladrão que rouba segredos corporativos através do uso de tecnologia de compartilhamento de sonhos."
-  },
-  {
-    id: 2,
-    titulo: "Stranger Things",
-    tipo: "serie",
-    ano: 2016,
-    genero: "Terror",
-    imagem: "https://picsum.photos/300/400?random=2",
-    resumo: "Quando um garoto desaparece, uma pequena cidade descobre um mistério envolvendo experimentos secretos."
-  },
-  {
-    id: 3,
-    titulo: "The Matrix",
-    tipo: "filme",
-    ano: 1999,
-    genero: "Ficção Científica",
-    imagem: "https://picsum.photos/300/400?random=3",
-    resumo: "Um hacker descobre que a realidade em que vive é uma simulação criada por inteligências artificiais."
-  },
-  {
-    id: 4,
-    titulo: "Breaking Bad",
-    tipo: "serie",
-    ano: 2008,
-    genero: "Drama",
-    imagem: "https://picsum.photos/300/400?random=4",
-    resumo: "Um professor de química do ensino médio diagnosticado com câncer decide fabricar metanfetamina."
-  },
-  {
-    id: 5,
-    titulo: "Interstellar",
-    tipo: "filme",
-    ano: 2014,
-    genero: "Ficção Científica",
-    imagem: "https://picsum.photos/300/400?random=5",
-    resumo: "Uma equipe de exploradores viaja através de um buraco de minhoca no espaço para garantir a sobrevivência da humanidade."
-  },
-  {
-    id: 6,
-    titulo: "Arcane",
-    tipo: "serie",
-    ano: 2021,
-    genero: "Animação",
-    imagem: "https://picsum.photos/300/400?random=6",
-    resumo: "Em meio ao conflito entre duas cidades-gêmeas, duas irmãs lutam em lados opostos de uma guerra entre tecnologias mágicas e convicções incompatíveis."
-  },
-  {
-    id: 7,
-    titulo: "Dark",
-    tipo: "serie",
-    ano: 2017,
-    genero: "Mistério",
-    imagem: "https://picsum.photos/300/400?random=7",
-    resumo: "O desaparecimento de duas crianças em uma cidade alemã expõe os segredos e as conexões ocultas entre quatro famílias através do tempo."
-  },
-  {
-    id: 8,
-    titulo: "Mad Max: Estrada da Fúria",
-    tipo: "filme",
-    ano: 2015,
-    genero: "Ação",
-    imagem: "https://picsum.photos/300/400?random=8",
-    resumo: "Em um mundo pós-apocalíptico, Max se junta a uma imperatriz rebelde para escapar de um tirano e seu exército através do deserto."
+// Busca os documentos no MongoDB
+async function getPosts() {
+  const db = conexao.db("banco");
+  const colecao = db.collection("db");
+
+  return colecao.find().toArray();
+}
+
+// 1. Buscar todos os itens
+app.get("/itens", async (req, res) => {
+  try {
+    const posts = await getPosts();
+    res.status(200).json(posts);
+  } catch (erro) {
+    console.error("Erro ao buscar itens:", erro);
+    res.status(500).json({ erro: "Não foi possível buscar os itens." });
   }
-];
-
-// 1. Rota principal - Retorna todos os itens do catálogo
-app.get("/itens", (req, res) => {
-  res.status(200).json(uniflix);
 });
 
-// 2. Rota para buscar um item pelo ID
-app.get("/itens/:id", (req, res) => {
-  const id = Number(req.params.id);
-  const item = uniflix.find((i) => i.id === id);
+// 2. Buscar item pelo ID
+app.get("/itens/:id", async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    const posts = await getPosts();
 
-  if (!item) {
-    return res.status(404).json({ erro: "Item não encontrado." });
+    const item = posts.find((i) => i.id === id);
+
+    if (!item) {
+      return res.status(404).json({ erro: "Item não encontrado." });
+    }
+
+    res.status(200).json(item);
+  } catch (erro) {
+    console.error("Erro ao buscar item:", erro);
+    res.status(500).json({ erro: "Não foi possível buscar o item." });
   }
-
-  res.status(200).json(item);
 });
 
-// 3. Rota para buscar itens por um ANO específico
-app.get("/itens/ano/:ano", (req, res) => {
-  const ano = Number(req.params.ano);
-  const resultado = uniflix.filter((item) => item.ano === ano);
+// 3. Buscar itens por ano
+app.get("/itens/ano/:ano", async (req, res) => {
+  try {
+    const ano = Number(req.params.ano);
+    const posts = await getPosts();
 
-  res.status(200).json(resultado);
+    const resultado = posts.filter((item) => item.ano === ano);
+
+    res.status(200).json(resultado);
+  } catch (erro) {
+    console.error("Erro ao buscar por ano:", erro);
+    res.status(500).json({ erro: "Não foi possível buscar por ano." });
+  }
 });
 
-// 4. Rota para buscar itens dentro de um INTERVALO de anos (:inicio até :fim)
-app.get("/itens/intervalo/:inicio/:fim", (req, res) => {
-  const { inicio, fim } = req.params;
-  const anoInicio = Number(inicio);
-  const anoFim = Number(fim);
+// 4. Buscar itens por intervalo de anos
+app.get("/itens/intervalo/:inicio/:fim", async (req, res) => {
+  try {
+    const anoInicio = Number(req.params.inicio);
+    const anoFim = Number(req.params.fim);
+    const posts = await getPosts();
 
-  const resultado = uniflix.filter(
-    (item) => item.ano >= anoInicio && item.ano <= anoFim
-  );
+    const resultado = posts.filter(
+      (item) => item.ano >= anoInicio && item.ano <= anoFim
+    );
 
-  res.status(200).json(resultado);
+    res.status(200).json(resultado);
+  } catch (erro) {
+    console.error("Erro ao buscar intervalo:", erro);
+    res.status(500).json({ erro: "Não foi possível buscar o intervalo." });
+  }
 });
 
-// 5. Rota para buscar itens por GÊNERO
-app.get("/itens/genero/:genero", (req, res) => {
-  const generoBuscado = req.params.genero.toLowerCase();
+// 5. Buscar itens por gênero
+app.get("/itens/genero/:genero", async (req, res) => {
+  try {
+    const generoBuscado = req.params.genero.toLowerCase();
+    const posts = await getPosts();
 
-  const resultado = uniflix.filter((item) =>
-    item.genero.toLowerCase().includes(generoBuscado)
-  );
+    const resultado = posts.filter((item) =>
+      item.genero?.toLowerCase().includes(generoBuscado)
+    );
 
-  res.status(200).json(resultado);
+    res.status(200).json(resultado);
+  } catch (erro) {
+    console.error("Erro ao buscar por gênero:", erro);
+    res.status(500).json({ erro: "Não foi possível buscar por gênero." });
+  }
 });
 
-// Inicialização do Servidor
-app.listen(3000, () => {
-  console.log("Servidor UniFlix rodando em http://localhost:3000");
-});
+// Inicialização do servidor
+async function iniciarServidor() {
+  try {
+    conexao = await conectarAoBanco(process.env.STRING_CONEXAO);
+
+    app.listen(3000, () => {
+      console.log("Servidor UniFlix rodando em http://localhost:3000");
+    });
+  } catch (erro) {
+    console.error("Erro ao iniciar o servidor:", erro);
+    process.exit(1);
+  }
+}
+
+iniciarServidor();
