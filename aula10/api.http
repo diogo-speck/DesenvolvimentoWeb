@@ -1,0 +1,10 @@
+### Criar Post via Upload de Imagem
+POST http://localhost:3000/upload
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="imagem"; filename="foto.jpg"
+Content-Type: image/jpeg
+
+< aula10\uploads\foto.jpg
+--boundary--

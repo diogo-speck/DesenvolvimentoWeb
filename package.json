@@ -1,0 +1,33 @@
+{
+  "name": "desenvolvimentoweb",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "license": "AGPL-version-3.0",
+  "private": false,
+  "engines": {
+    "node": ">= 14.0.0",
+    "npm": ">= 6.0.0"
+  },
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": "",
+  "keywords": [],
+  "author": "",
+  "contributors": [],
+  "scripts": {
+    "dev": "",
+    "test": ""
+  },
+  "dependencies": {
+    "dotenv": "^18.0.7",
+    "express": "^5.2.1",
+    "express-form-data": "^3.0.1",
+    "mongodb": "^6.10.0",
+    "multer": "^2.5.0"
+  },
+  "description": ""
+}
