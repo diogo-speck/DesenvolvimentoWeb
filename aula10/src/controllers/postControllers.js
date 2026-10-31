@@ -1,69 +1,75 @@
-import { getTodosPosts, criarPost, atualizarPost } from "../models/postModels.js";
-import fs from "fs";
-import path from "path";
+import { getTodosPosts, criarPost, atualizarPost } from "../models/postModels.js"; import fs from "fs"; import path from "path";
 
-export async function listarPosts(req, res) {
-    try {
-        const posts = await getTodosPosts();
-        res.status(200).json(posts);
-    } catch (erro) {
-        console.error(erro.message);
-        res.status(500).json({ "Erro": "Falha na requisição" });
-    }
+export async function listarPosts(req, res) { try { const posts = await getTodosPosts(); res.status(200).json(posts); } catch (erro) { console.error(erro.message); res.status(500).json({ Erro: "Falha na requisição" }); } }
+
+export async function postarNovoPost(req, res) { const novoPost = req.body;
+
+try {
+    const postCriado = await criarPost(novoPost);
+    res.status(200).json(postCriado);
+} catch (erro) {
+    console.error(erro.message);
+    res.status(500).json({ Erro: "Falha ao criar o post" });
 }
 
-export async function postarNovoPost(req, res) {
-    const novoPost = req.body;
-    try {
-        const postCriado = await criarPost(novoPost);
-        res.status(200).json(postCriado);
-    } catch (erro) {
-        console.error(erro.message);
-        res.status(500).json({ "Erro": "Falha ao criar o post" });
-    }
+
 }
 
-export async function uploadImagem(req, res) {
-    if (!req.file) {
-        return res.status(400).json({ "Erro": "Nenhum arquivo enviado. Certifique-se de usar o campo 'imagem'." });
+export async function uploadImagem(req, res) { if (!req.file) { return res.status(400).json({ Erro: "Nenhum arquivo enviado." }); }
+
+const descricao = req.body.descricao;
+
+if (!descricao) {
+    fs.unlinkSync(req.file.path);
+    return res.status(400).json({
+        Erro: "A descrição é obrigatória."
+    });
+}
+
+try {
+    const pastaUploads = path.resolve(process.cwd(), "../aula10/uploads");
+
+    if (!fs.existsSync(pastaUploads)) {
+        fs.mkdirSync(pastaUploads, { recursive: true });
     }
+
+    const extensao = path.extname(req.file.originalname);
 
     const novoPost = {
-        descricao: "",
-        imgUrl: req.file.originalname,
-        alt: ""
+        descricao: descricao,
+        imgUrl: "",
+        alt: descricao
     };
 
-    try {
-        // 1. Define o caminho absoluto da pasta onde as imagens devem ser salvas
-        const pastaUploads = path.resolve(process.cwd(), "../aula10/uploads");
+    const postCriado = await criarPost(novoPost);
 
-        // 2. Garante que a pasta existe
-        if (!fs.existsSync(pastaUploads)) {
-            fs.mkdirSync(pastaUploads, { recursive: true });
-        }
+    const nomeImagem = `${postCriado.insertedId}${extensao}`;
 
-        // 3. Salva no banco para obter o ID
-        const postCriado = await criarPost(novoPost);
+    const destinoFinal = path.join(pastaUploads, nomeImagem);
 
-        // 4. Define o caminho absoluto de destino com o ID gerado
-        const destinoFinal = path.join(pastaUploads, `${postCriado.insertedId}.png`);
+    fs.renameSync(req.file.path, destinoFinal);
 
-        // 5. Renomeia/Move o arquivo usando o caminho do Multer e o destino absoluto
-        fs.renameSync(req.file.path, destinoFinal);
+    const postAtualizado = {
+        imgUrl: nomeImagem,
+        descricao: descricao,
+        alt: descricao
+    };
 
-        // 6. Atualiza o banco com o nome do arquivo final
-        const postAtualizado = {
-            imgUrl: `${postCriado.insertedId}.png`,
-            descricao: req.body.descricao || "",
-            alt: req.body.alt || ""
-        };
+    await atualizarPost(postCriado.insertedId, postAtualizado);
 
-        await atualizarPost(postCriado.insertedId, postAtualizado);
+    res.status(201).json({
+        mensagem: "Postagem salva com sucesso!",
+        postagem: postAtualizado
+    });
 
-        res.status(200).json(postCriado);
-    } catch (erro) {
-        console.error("Erro detalhado no upload:", erro);
-        res.status(500).json({ "Erro": "Falha no upload da imagem", "Detalhe": erro.message });
-    }
+} catch (erro) {
+    console.error("Erro detalhado no upload:", erro);
+
+    res.status(500).json({
+        Erro: "Falha no upload da imagem",
+        Detalhe: erro.message
+    });
+}
+
+
 }
